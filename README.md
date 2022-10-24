@@ -85,12 +85,14 @@ GRAPH http://data-issa.cirad.fr/graph/articles {
 LIMIT 100
 ```
 ```
-prefix issapr: http://data-issa.cirad.fr/property/
-
+prefix issapr: <http://data-issa.cirad.fr/property/>
+prefix dct:	<http://purl.org/dc/terms/>
+prefix fabio:     <http://purl.org/spar/fabio/>
+prefix frbr: <http://purl.org/vocab/frbr/core#>
 SELECT * WHERE { 
-GRAPH http://data-issa.cirad.fr/graph/articles {
+GRAPH <http://data-issa.cirad.fr/graph/articles> {
 ?s dct:issued ?d; dct:title  ?title . 
-?abstract http://purl.org/vocab/frbr/core#partOf ?s; rdf:type http://purl.org/spar/fabio/Abstract .
+?abstract frbr:partOf ?s; rdf:type fabio:Abstract .
 ?abstract rdf:value ?AbstractValue . 
 }} 
 LIMIT 100
