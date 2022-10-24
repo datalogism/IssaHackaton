@@ -11,26 +11,33 @@
 
 https://hub.docker.com/r/wimmics/corese
 
+## How to retrain a word2vec ?
+https://www.quora.com/Can-we-re-train-a-word-embedding-model-with-additional-data
+
 
 ## Extraction de termes
 
 * Indice de spécificité de Lafon  : Indémodable !
 https://www.persee.fr/doc/mots_0243-6450_1980_num_1_1_1008
 * Utilisé pour construction thésaurus par ISTEX et INRAE  : http://termsuite.github.io/#publications
+* KeyBert > https://github.com/MaartenGr/KeyBERT#embeddings
+
+
+## Embeddings :
+
+* Multilingual : https://github.com/facebookresearch/MUSE
+* Learning Hyperonyms from Ontology :  https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8610673/
 
 ## Extraction de relation sémantiques
 
-
 L'idée serai de pouvoir repérer des relation d'hyperonimie
 https://medium.com/analytics-vidhya/automatic-extraction-of-hypernym-relations-from-text-using-ml-4b04eb33097f
-
 https://github.com/suhaibani/HWE
 
 ## Analyse de semantic shift et modèles diachroniques
 
  * Comparer des embeddings sur plusieurs périodes
 https://aclanthology.org/2021.naacl-main.369/
-
 https://www.changeiskey.org/talk/kbr-digital-heritage-seminar-series/2022-10-18-KBR-for%20publication-combined.pdf
 
 
@@ -68,6 +75,17 @@ GRAPH <http://data-issa.cirad.fr/graph/articles> {
 
 ``` 
 refix issapr: http://data-issa.cirad.fr/property/
+
+SELECT * WHERE { 
+GRAPH http://data-issa.cirad.fr/graph/articles {
+?s dct:issued ?d; dct:title  ?title . 
+?abstract http://purl.org/vocab/frbr/core#partOf ?s; rdf:type http://purl.org/spar/fabio/Abstract .
+?abstract rdf:value ?AbstractValue . 
+}} 
+LIMIT 100
+```
+```
+prefix issapr: http://data-issa.cirad.fr/property/
 
 SELECT * WHERE { 
 GRAPH http://data-issa.cirad.fr/graph/articles {
