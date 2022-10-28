@@ -97,3 +97,26 @@ GRAPH <http://data-issa.cirad.fr/graph/articles> {
 }} 
 LIMIT 100
 ```
+
+---------------
+
+## WORK DAY 1
+
+```
+prefix issapr: <http://data-issa.cirad.fr/property/>
+prefix dct:	<http://purl.org/dc/terms/>
+prefix fabio:     <http://purl.org/spar/fabio/>
+prefix frbr: <http://purl.org/vocab/frbr/core#>
+prefix issa: <http://data-issa.cirad.fr/>
+prefix oa:     <http://www.w3.org/ns/oa#>
+prefix prov:   <http://www.w3.org/ns/prov#>
+
+SELECT * WHERE { 
+?desc a issa:ThematicDescriptorAnnotation;
+prov:wasAttributedTo ?annoType;
+ oa:hasTarget ?paper.
+?paper dct:identifier ?paperID;
+             dc:language ?lang.
+             FILTER (?lang = "fre").
+}
+```
