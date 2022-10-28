@@ -114,9 +114,30 @@ prefix prov:   <http://www.w3.org/ns/prov#>
 SELECT * WHERE { 
 ?desc a issa:ThematicDescriptorAnnotation;
 prov:wasAttributedTo ?annoType;
- oa:hasTarget ?paper.
+oa:hasTarget ?paper;
+oa:hasBody <http://aims.fao.org/aos/agrovoc/c_7713>.
 ?paper dct:identifier ?paperID;
-             dc:language ?lang.
-             FILTER (?lang = "fre").
+             dc:language ?lang
 }
+```
+
+https://agrovoc.fao.org/sparql
+
+``` 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX skosxl: <http://www.w3.org/2008/05/skos-xl#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+SELECT DISTINCT ?concept ?lang ?prefLabel (GROUP_CONCAT ( DISTINCT concat('"',?altLabel,'"@',lang(?altLabel)); separator="|_|" ) as ?altLabels) 
+WHERE { 
+ 
+  ?concept skosxl:prefLabel/skosxl:literalForm ?prefLabel . 
+  BIND(lang(?prefLabel) AS ?lang) 
+  OPTIONAL{ 
+  	?concept skosxl:altLabel/skosxl:literalForm ?altLabel . 
+  	FILTER(lang(?altLabel) = ?lang) 
+  }.
+  FILTER( CONTAINS(?prefLabel,"cacao") )
+} 
+GROUP BY ?concept ?lang ?prefLabel 
+ORDER BY ?lang 
 ```
