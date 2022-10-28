@@ -229,3 +229,31 @@ oa:hasBody <http://aims.fao.org/aos/agrovoc/c_7713>
 
 }
 ```
+## TEST KHI 2
+
+```
+prefix issapr: <http://data-issa.cirad.fr/property/>
+prefix dct:	<http://purl.org/dc/terms/>
+prefix fabio:     <http://purl.org/spar/fabio/>
+prefix frbr: <http://purl.org/vocab/frbr/core#>
+prefix issa: <http://data-issa.cirad.fr/>
+prefix oa:     <http://www.w3.org/ns/oa#>
+prefix prov:   <http://www.w3.org/ns/prov#>
+prefix skosxl: <http://www.w3.org/2008/05/skos-xl#>
+
+
+SELECT ?entity COUNT(?paper)
+ WHERE { 
+?paper dct:identifier ?paperID;
+             dc:language ?lang.
+?abstract frbr:partOf ?paper; rdf:type fabio:Abstract .
+?abstract rdf:value ?AbstractValue . 
+?desc a issa:ThematicDescriptorAnnotation;
+prov:wasAttributedTo ?annoType;
+oa:hasTarget ?paper;
+oa:hasBody <http://aims.fao.org/aos/agrovoc/c_7713>.
+?entity a prov:Entity; schema:about ?paper;
+oa:hasBody ?uri;
+prov:wasAttributedTo issa:Pyclinrec
+} 
+```
